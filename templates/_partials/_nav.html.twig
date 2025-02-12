@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg bg-info text-white">  {#body-tertiary#}
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{"path('app_catalogue')"}}">
+  <img src="{{ asset('image/villagegreen.png') }}" alt="logo" width="130" height="70">
+  
+  
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% set currentRoute = app.request.attributes.get('_route') %}
+                  <li class="nav-item">
+                      <a class="nav-link mx-md-4 {% if currentRoute == 'app_catelogue' %}active{% endif %} espace"
+                          href="{{ path('app_catelogue') }}">CATALOGUE</a>
+                  </li>
+          <li class="nav-item">
+            {# <a class="nav-link mx-md-4 {% if currentRoute == 'app_categorie' %}"active{% endif %} espace" href="{{ path('app_categorie')}}">Categorie</a>
+          </li> #}
+           <li class="nav-item">
+            <a class="nav-link" href="#">COMMANDE</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#"></a>
+          </li>
+          
+         <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> {#me-auto margin  il permet à gouche, ms-auto il permet coté droit #}
+         {% if app.user%} {#si je connect ajouté condition#}
+         <li class="nav-item">
+            <a class="nav-link" href="#">Mon compte</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout')}}">Me déconnecter</a>
+          </li>
+  
+       
+          {% else %}
+          {# <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_register')}}">M'inscrire</a>
+          </li> #}
+                  {# <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login')}}">Me Connecter</a>
+          </li> #}
+          <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+          {% endif %}
+         </ul>
+      </div>
+    </div>
+  </nav>
