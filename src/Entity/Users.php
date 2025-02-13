@@ -7,11 +7,13 @@ use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
@@ -38,10 +40,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $nom_acheteur = null;
+    private ?string $nom = null;  //i changed to just nom
 
     #[ORM\Column(length: 50)]
-    private ?string $prenom_acheteur = null;
+    private ?string $prenom = null; //i leave prenom and delete acteteur
 
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
@@ -139,26 +141,26 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         // You can add code here to erase sensitive data if needed
     }
 
-    public function getNomAcheteur(): ?string
+    public function getNom(): ?string
     {
-        return $this->nom_acheteur;
+        return $this->nom;
     }
 
-    public function setNomAcheteur(string $nom_acheteur): static
+    public function setNom(string $nom): static
     {
-        $this->nom_acheteur = $nom_acheteur;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getPrenomAcheteur(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->prenom_acheteur;
+        return $this->prenom;
     }
 
-    public function setPrenomAcheteur(string $prenom_acheteur): static
+    public function setPrenom(string $prenom): static
     {
-        $this->prenom_acheteur = $prenom_acheteur;
+        $this->prenom = $prenom;
 
         return $this;
     }

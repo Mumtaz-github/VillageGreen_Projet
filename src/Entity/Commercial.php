@@ -30,7 +30,7 @@ class Commercial
     /**
      * @var Collection<int, Users>
      */
-    #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'Commercial')]
+   #[ORM\OneToMany(targetEntity: Users::class, mappedBy: 'Commercial')]
     private Collection $users;
 
     public function __construct()
