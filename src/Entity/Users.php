@@ -57,12 +57,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     // #[ORM\Column]
     // private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $numero_siret = null;
-
+ 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Commercial $Commercial = null;
+    private ?Commercial $Commercial = null;  
 
     // /**
     //  * @var Collection<int, Commande>
@@ -201,29 +199,19 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getCreatedAt(): ?\DateTimeImmutable
-    // {
-    //     return $this->created_at;
-    // }
-
-    // public function setCreatedAt(\DateTimeImmutable $created_at): static
-    // {
-    //     $this->created_at = $created_at;
-
-    //     return $this;
-    // }
-
-    public function getNumeroSiret(): ?string
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->numero_siret;
+        return $this->created_at;
     }
 
-    public function setNumeroSiret(string $numero_siret): static
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
-        $this->numero_siret = $numero_siret;
+        $this->created_at = $created_at;
 
         return $this;
     }
+
+  
 
     public function getCommercial(): ?Commercial
     {

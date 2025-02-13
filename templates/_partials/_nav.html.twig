@@ -9,7 +9,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2 mb-lg-0">
           {% set currentRoute = app.request.attributes.get('_route') %}
                   <li class="nav-item">
                       <a class="nav-link mx-md-4 {% if currentRoute == 'app_catelogue' %}active{% endif %} espace"
@@ -24,9 +24,10 @@
            <li class="nav-item">
             <a class="nav-link" href="#"></a>
           </li>
+        </ul>
           
          <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> {#me-auto margin  il permet à gouche, ms-auto il permet coté droit #}
-         {% if app.user%} {#si je connect ajouté condition#}
+      {% if app.user%} {#si je connect ajouté condition#}
          <li class="nav-item">
             <a class="nav-link" href="#">Mon compte</a>
           </li>
@@ -35,7 +36,7 @@
           </li>
   
        
-          {% else %}
+        {% else %}
            <li class="nav-item">
             <a class="nav-link" href="{{ path('app_register')}}">M'inscrire</a>
           </li> 
