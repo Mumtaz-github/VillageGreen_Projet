@@ -24,7 +24,11 @@ class Categories
     #[ORM\Column(length: 250)]
     private ?string $url_photo = null;
 
+    #[ORM\Column(length: 255)] // Add this line for the slug
+    private ?string $slug = null; // Add this line for the slug
+
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
+    // #[ORM\JoinColumn(onDelete: 'CASCAD')]  //j'ai ajouté à case 
     private ?self $parent = null;
 
     /**
@@ -81,7 +85,28 @@ class Categories
         return $this;
     }
 
-    public function getParent(): ?self
+    public function getSlug(): ?string // Getter for slug
+
+    {
+
+        return $this->slug;
+
+    }
+
+
+    public function setSlug(string $slug): static // Setter for slug
+
+    {
+
+        $this->slug = $slug;
+
+
+        return $this;
+
+    }
+
+
+ public function getParent(): ?self
     {
         return $this->parent;
     }

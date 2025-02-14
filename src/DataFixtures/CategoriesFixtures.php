@@ -2,72 +2,75 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Categories;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategoriesFixtures extends Fixture
 {
-    public function __construct(private SluggerInterface $sluggger){}
+    public function __construct(private SluggerInterface $slugger) {}
+
     public function load(ObjectManager $manager): void
+{
+    $parent = $this->createCategory('Guitars & Basses', 'imag_categories/guitarsBases.png', null, $manager);
+
+    // Subcategories for Guitars
+    $this->createCategory('G Electriques', 'imag_categoris/sous_categories/gElectrique1.webp', $parent, $manager);
+    $this->createCategory('G Classiques', 'imag_categoris/sous_categories/gClassique.webp', $parent, $manager);
+    $this->createCategory('G Ukuleles', 'imag_categoris/sous_categories/gUkuleles3.webp', $parent, $manager);
+
+    $parent = $this->createCategory('Batteris & Percussion', 'imag_categories/batterisPercussion.png', null, $manager);
+
+    // Subcategories for Drums & Percussion
+    $this->createCategory('B Acoustiques', 'imag_categoris/sous_categories/Bacoustic1.webp', $parent, $manager);
+    $this->createCategory('B Electroniques', 'imag_categoris/sous_categories/BElectroniques2.webp', $parent, $manager);
+    $this->createCategory('B Percussion', 'imag_categoris/sous_categories/Bercussion3.webp', $parent, $manager);
+
+    $parent = $this->createCategory('Pianos & Claviers', 'imag_categories/pianoClavier.png', null, $manager);
+
+    // Subcategories for Keys
+    $this->createCategory('Pianos Queue', 'imag_categoris/sous_categories/PQueue1.webp', $parent, $manager);
+    $this->createCategory('Accordeons', 'imag_categoris/sous_categories/PCMaitres2.webp', $parent, $manager);
+    $this->createCategory('Pianos Droits', 'imag_categoris/sous_categories/PDroits3.webp', $parent, $manager);
+
+    $parent = $this->createCategory('Lumiere & Scene', 'imag_categories/lumiereScene.jpg', null, $manager);
+
+    // Subcategories for Lighting & Stage
+    $this->createCategory('Set Projecteurs', 'imag_categoris/sous_categories/lProjecteurs1.webp', $parent, $manager);
+    $this->createCategory('Projectures', 'imag_categoris/sous_categories/lProjectures2.webp', $parent, $manager);
+    $this->createCategory('P Robotises', 'imag_categoris/sous_categories/lProjecturesR.webp', $parent, $manager);
+
+    $parent = $this->createCategory('Sonorisation', 'imag_categories/sonorisation.png', null, $manager);
+
+    // Subcategories for PA Equipment
+    $this->createCategory('Set Sonorisation', 'imag_categoris/sous_categories/Scomplets1.webp', $parent, $manager);
+    $this->createCategory('Enceintes Sonorisation', 'imag_categoris/sous_categories/Senceintes2.webp', $parent, $manager);
+    $this->createCategory('Microphones', 'imag_categoris/sous_categories/Smicrophones3.webp', $parent, $manager);
+
+    $parent = $this->createCategory('Instruments Vent', 'imag_categories/instrumentsVent.jpg', null, $manager);
+
+    // Subcategories for Wind Instruments
+    $this->createCategory('V Clarinettes', 'imag_categoris/sous_categories/vClarinettes3.webp', $parent, $manager);
+    $this->createCategory('V Trompettes', 'imag_categoris/sous_categories/vTrompettes2.webp', $parent, $manager);
+    $this->createCategory('Saxophones', 'imag_categoris/sous_categories/vSaxophones1.webp', $parent, $manager);
+
+    $manager->flush();
+}
+    public function createCategory(string $name, string $url_photo = null, Categories $parent = null, ObjectManager $manager): Categories
     {
-        $parent = $this->createCategory('Guitars & Basses', 'Guitars_&_Bases.png', null, $manager);
-
-        //sous categories Guitars
-        $this->createCategory('Acoustic G', 'Acoustic_G_4.png', $parent, $manager);
-        $this->createCategory('Classical G', 'Classical_G_2.png', $parent, $manager);
-        $this->createCategory('Electri G', 'Electric_G_1.png', $parent, $manager);
-        
-
-
-        $parent = $this->createCategory('Drums & Percussion', 'Drums_&_Percussion.png', null, $manager);
-
-        //sous categories Drums & Percussion
-        $this->createCategory('Acoustic Drums', 'AcousticDrums-01.webp', $parent, $manager);
-        $this->createCategory('Percussion', 'Percussion-03.webp', $parent, $manager);
-        $this->createCategory('Electronic Drum', 'ElectronicDrum-02.webp', $parent, $manager);
-
-
-        $parent = $this->createCategory('Keys', 'Keys.png', null, $manager);
-
-        //sous categories Keys
-        $this->createCategory('Acoustic G', 'Acoustic_G_4.png', $parent, $manager);
-        $this->createCategory('Classical G', 'Classical_G_2.png', $parent, $manager);
-        $this->createCategory('Electri G', 'Electric_G_1.png', $parent, $manager);
-
-
-        $parent = $this->createCategory('Lighting & Stage', 'Lighting_&_Stage.jpg', null, $manager);
-
-        //sous categories Lighting & Stage
-        $this->createCategory('Acoustic G', 'Acoustic_G_4.png', $parent, $manager);
-        $this->createCategory('Classical G', 'Classical_G_2.png', $parent, $manager);
-        $this->createCategory('Electri G', 'Electric_G_1.png', $parent, $manager);
-
-
-
-        $parent = $this->createCategory('PA Equipment', 'PA_Equipment.png', null, $manager);
-
-        //sous categories PA Equipment
-        $this->createCategory('Acoustic G', 'Acoustic_G_4.png', $parent, $manager);
-        $this->createCategory('Classical G', 'Classical_G_2.png', $parent, $manager);
-        $this->createCategory('Electri G', 'Electric_G_1.png', $parent, $manager);
-
-        $parent = $this->createCategory('Wind Instruments', 'Wind_Instruments.jpg', null, $manager);
-
-        //sous categories Wind Instruments
-        $this->createCategory('Acoustic G', 'Acoustic_G_4.png', $parent, $manager);
-        $this->createCategory('Classical G', 'Classical_G_2.png', $parent, $manager);
-        $this->createCategory('Electri G', 'Electric_G_1.png', $parent, $manager);
-
-        $manager->flush();
-    }
-    public function createCategory(string $name, Categories $parent = null, ObjectManager $manager){
-
         $category = new Categories();
-        $category->setName($name);
-        $category->setSlug($this->slugger->slug($category->getName())->lower());
+        $category->setNom($name);
+        $category->setSlug($this->slugger->slug($category->getNom())->lower());
         $category->setParent($parent);
+        
+        // Set the image URL if provided
+        if ($url_photo) {
+            $category->setUrlPhoto($url_photo);
+        }
+    
         $manager->persist($category);
+    
         return $category;
     }
 }
